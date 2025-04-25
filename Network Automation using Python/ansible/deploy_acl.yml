@@ -1,0 +1,11 @@
+---
+- name: Deploy ACL on Cisco Devices
+  hosts: routers
+  gather_facts: no
+  tasks:
+    - name: Apply ACL configuration
+      cisco.ios.ios_config:
+        lines:
+          - access-list 100 permit tcp any any eq 80
+          - access-list 100 deny ip any any
+        parents: ip access-list extended 100
